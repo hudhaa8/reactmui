@@ -7,11 +7,15 @@ export function Counter() {
   const [dislike, setdisLike] = useState(0);
   //state- current value
   //setState- helps to update state
+
+const incrementLike=()=>setLike(like + 1)
+const incrementDisLike=()=>setdisLike(dislike + 1)
+
   return (
     <div className="counter-container">
       <IconButton
         className="like-dislike"
-        onClick={() => setLike(like + 1)}
+        onClick={() =>incrementLike }
         aria-label="like button"
         color="primary"
       >
@@ -22,7 +26,7 @@ export function Counter() {
 
       <IconButton
         className="like-dislike"
-        onClick={() => setdisLike(dislike + 1)}
+        onClick={() => incrementDisLike}
         aria-label="dislike button"
         color="error"
       >

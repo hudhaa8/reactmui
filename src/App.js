@@ -104,7 +104,7 @@ export default function App() {
           <Button color="inherit" onClick={() => history.push("/")}>
             Home
           </Button>
-          <Button color="inherit" onClick={() => history.push("/movie")}>
+          <Button color="inherit" onClick={() => history.push("/movies")}>
             Movies
           </Button>
           <Button color="inherit" onClick={() => history.push("/colorgame")}>
@@ -127,13 +127,13 @@ export default function App() {
 
           {/* : makes id variable */}
           <Route path="/movies/:id">
-            <MovieDetails movieList={movieList} />
+            <MovieDetails />
           </Route>
 
           <Route path="/movie/add">
             <AddMovie movieList={movieList} setMovieList={setMovieList} />
           </Route>
-          <Route path="/movie">
+          <Route path="/movies">
             <MovieList  />
           </Route>
           <Route path="/colorgame">
@@ -167,5 +167,3 @@ function GameBox() {
   const val = "X";
   return <div className="game-box">{val}</div>;
 }
-
- 
