@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./App.css";
-import { Msg } from "./Msg";
+//import { Msg } from "./Msg";
 import { AddColor } from "./AddColor";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import { NotFound } from "./NotFound";
@@ -131,10 +131,11 @@ export default function App() {
           </Route>
 
           <Route path="/movie/add">
-            <AddMovie movieList={movieList} setMovieList={setMovieList} />
+            {/* <AddMovie movieList={movieList} setMovieList={setMovieList} /> */}
+            <AddMovie />
           </Route>
           <Route path="/movies">
-            <MovieList  />
+            <MovieList />
           </Route>
           <Route path="/colorgame">
             <AddColor />

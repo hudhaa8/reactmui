@@ -44,6 +44,7 @@ export function MovieList() {
             trailer={trailer}
             deleteButton={
               <IconButton
+              style={{marginLeft: "auto"}}
                 onClick={() => {
                   deleteMovie(id);
                   /* console.log(index);

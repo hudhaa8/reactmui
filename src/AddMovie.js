@@ -2,7 +2,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-export function AddMovie({ movieList, setMovieList }) {
+import {API} from "./global"
+
+export function AddMovie() {
   const [name, setName] = useState(" ");
   const [poster, setPoster] = useState(" ");
   const [rating, setRating] = useState(" ");
@@ -53,8 +55,20 @@ export function AddMovie({ movieList, setMovieList }) {
             summary: summary,
             trailer: trailer,
           };
-          setMovieList([...movieList, newMovie]);
-          history.push("movies")
+
+          //1. method must be POST
+          // 2. body - JSON data
+          // 3. headers - JSON data
+          fetch(`${API}/movies/`, {
+            method: "POST",
+            body: JSON.stringify(newMovie),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(()=>history.push("/movies"))
+
+         // setMovieList([...movieList, newMovie]);
+          
         }}
       >
         Add Movie
@@ -62,3 +76,4 @@ export function AddMovie({ movieList, setMovieList }) {
     </div>
   );
 }
+
