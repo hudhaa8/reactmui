@@ -59,6 +59,7 @@ export function AddMovie() {
           //1. method must be POST
           // 2. body - JSON data
           // 3. headers - JSON data
+          // 4. After POST is complete move to /movies
           fetch(`${API}/movies/`, {
             method: "POST",
             body: JSON.stringify(newMovie),

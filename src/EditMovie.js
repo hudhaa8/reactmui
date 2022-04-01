@@ -1,20 +1,38 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { API } from "./global";
 
 export function EditMovie({ movieList, setMovieList }) {
   const { id } = useParams(); //useParams extracting parameter from url
-  const movie = movieList[id];
+  /* const movie = movieList[id];
+  console.log(movie); */
+
+  const [movie, setMovie] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/movies/${id}`, {
+      method: "GET",
+    }) // promise
+      .then((data) => data.json()) // Response object
+      .then((mvs) => setMovie(mvs));
+    //.catch((err)=> console.log(err))
+  }, []);
+
   console.log(movie);
 
+  return (
+    <div>{movie ? <EditMovieForm movie={movie} /> : <h2>Loading</h2>}</div>
+  );
+}
+
+function EditMovieForm({ movie }) {
   const [name, setName] = useState(movie.name);
   const [poster, setPoster] = useState(movie.poster);
   const [rating, setRating] = useState(movie.rating);
   const [summary, setSummary] = useState(movie.summary);
   const [trailer, setTrailer] = useState(movie.trailer);
   const history = useHistory();
-
   return (
     <div className="add-movie-form">
       <TextField
@@ -69,10 +87,21 @@ export function EditMovie({ movieList, setMovieList }) {
             summary: summary,
             trailer: trailer,
           };
-          const copyMovieList = [...movieList];
+          // 1. method must be PUT & pass id
+          // 2. body - JSON data
+          // 3. headers - JSON data
+          // After PUT is complete ->  movie to /movies
+          fetch(`${API}/movies/${movie.id}`, {
+            method: "PUT",
+            body: JSON.stringify(updatedMovie),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(() => history.push("/movies"));
+          /* const copyMovieList = [...movieList];
           copyMovieList[id] = updatedMovie;
           setMovieList(copyMovieList);
-          history.push("/movie");
+          history.push("/movie"); */
         }}
       >
         Save

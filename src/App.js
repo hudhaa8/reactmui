@@ -122,7 +122,7 @@ export default function App() {
       <div className="route-container">
         <Switch>
           <Route path="/movies/edit/:id">
-            <EditMovie movieList={movieList} setMovieList={setMovieList} />
+            <EditMovie  />
           </Route>
 
           {/* : makes id variable */}
