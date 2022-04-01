@@ -33,6 +33,31 @@ function EditMovieForm({ movie }) {
   const [summary, setSummary] = useState(movie.summary);
   const [trailer, setTrailer] = useState(movie.trailer);
   const history = useHistory();
+
+  const editMovie=() => {
+    const updatedMovie = {
+      name: name,
+      poster: poster,
+      rating: rating,
+      summary: summary,
+      trailer: trailer,
+    };
+    // 1. method must be PUT & pass id
+    // 2. body - JSON data
+    // 3. headers - JSON data
+    // After PUT is complete ->  movie to /movies
+    fetch(`${API}/movies/${movie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedMovie),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => history.push("/movies"));
+    /* const copyMovieList = [...movieList];
+    copyMovieList[id] = updatedMovie;
+    setMovieList(copyMovieList);
+    history.push("/movie"); */
+  }
   return (
     <div className="add-movie-form">
       <TextField
@@ -79,30 +104,7 @@ function EditMovieForm({ movie }) {
       <Button
         variant="contained"
         color="success"
-        onClick={() => {
-          const updatedMovie = {
-            name: name,
-            poster: poster,
-            rating: rating,
-            summary: summary,
-            trailer: trailer,
-          };
-          // 1. method must be PUT & pass id
-          // 2. body - JSON data
-          // 3. headers - JSON data
-          // After PUT is complete ->  movie to /movies
-          fetch(`${API}/movies/${movie.id}`, {
-            method: "PUT",
-            body: JSON.stringify(updatedMovie),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }).then(() => history.push("/movies"));
-          /* const copyMovieList = [...movieList];
-          copyMovieList[id] = updatedMovie;
-          setMovieList(copyMovieList);
-          history.push("/movie"); */
-        }}
+        onClick={()=>editMovie()}
       >
         Save
       </Button>
