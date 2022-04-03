@@ -6,15 +6,15 @@ import { API } from "./global";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-// task
-// validation on AddMovie
+// Task
+// Form validation on AddMovie
 // name- required
 // poster-min 4 required
 // rating 1-10, required
 // summary min 20 char , required
 // trailer -min 4, rquired
 
-const formValidationSchema = yup.object({
+export const movieValidationSchema = yup.object({
   name: yup.string().required("why not fill this name😀"),
 
   poster: yup
@@ -49,20 +49,23 @@ export function AddMovie() {
       summary: "",
       trailer: "",
     },
-    validationSchema: formValidationSchema,
+    validationSchema: movieValidationSchema,
     onSubmit: (newMovie) => {
-      console.log("onSubmit", newMovie);
-        
-      fetch(`${API}/movies/`, {
-          method: "POST",
-          body: JSON.stringify(newMovie),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).then(() => history.push("/movies"));
+      addMovie(newMovie)
     },
   });
-  const addMovie = (newMovie) => {};
+
+  const addMovie = (newMovie) => {
+    console.log("onSubmit", newMovie);
+        
+    fetch(`${API}/movies/`, {
+        method: "POST",
+        body: JSON.stringify(newMovie),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(() => history.push("/movies"));
+  };
   return (
     <form onSubmit={formik.handleSubmit} className="add-movie-form">
       <TextField
