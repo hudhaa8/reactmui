@@ -121,8 +121,12 @@ export default function App() {
 
       <div className="route-container">
         <Switch>
+          <Route exact path="/">
+            <Home />
+            <BasicForm />
+          </Route>
           <Route path="/movies/edit/:id">
-            <EditMovie  />
+            <EditMovie />
           </Route>
 
           {/* : makes id variable */}
@@ -143,10 +147,7 @@ export default function App() {
           <Route path="/tic-tac-toe">
             <TicTacToe />
           </Route>
-          <Route exact path="/">
-            <Home />
-            <BasicForm />
-          </Route>
+
           <Route path="**">
             <NotFound />
           </Route>

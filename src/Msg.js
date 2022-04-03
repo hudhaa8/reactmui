@@ -5,3 +5,4 @@ export function Msg({ name }) {
     </div>
   );
 }
+
